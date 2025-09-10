@@ -4,6 +4,10 @@ import userRoutes from './routes/User.routes.js';
 const app = express();
 
 app.use(express.json());
-app.use('/user', userRoutes);
+app.use('/', userRoutes);
+
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
 
 export default app;
