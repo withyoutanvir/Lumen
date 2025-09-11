@@ -1,5 +1,5 @@
 import express from "express";
-import MailSender from "../controllers/mailcontroller.js";
+import MailSender from "../controllers/mail.controller.js";
 
 const router = express.Router();
 

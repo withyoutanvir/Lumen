@@ -12,8 +12,8 @@ const MailSender = (req, res) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: req.body.email, 
-    subject: "Checking the Mail Sender",
-    text: "It is working",
+    subject: req.body.subject,
+    text: req.body.message,
   };
 
   transporter.sendMail(mailOptions, (err, info) => {
