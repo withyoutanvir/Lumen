@@ -5,8 +5,7 @@
 - Janila  
 - Mallikarjun  
 - Akansha  
-- Meghana  
-- Vritika  
+- Meghana   
 
 ##  Backend
 - Tanvir (Inclusively for Machine learning)
@@ -15,7 +14,7 @@
 - Nikitha 
 
 ##  Machine Learning
-- Tanvir
+
 - Keerthi   
 - Janila   
 - Vritika (Inclusively for Frontend) 
