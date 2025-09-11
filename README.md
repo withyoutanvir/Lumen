@@ -9,7 +9,7 @@
 
 ##  Backend
 - Tanvir (Inclusively for Machine learning)
-- Divya  
+- Divya  (Inclusively for Frontend)
 - Aditya  
 - Nikitha 
 
