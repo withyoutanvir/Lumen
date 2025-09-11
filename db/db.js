@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/lumen', {
+    await mongoose.connect('mongodb+srv://lumen:cUMyfN1vXgGLXE90@lumen.njnmvvi.mongodb.net/', {
       
     });
     console.log('MongoDB connected');
