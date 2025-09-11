@@ -22,9 +22,10 @@ export const getAllSuppliers = async (req, res) => {
 };
 
 // Get single supplier
-export const getSupplierById = async (req, res) => {
+// Get supplier by email
+export const getSupplierByEmail = async (req, res) => {
   try {
-    const supplier = await Supplier.findById(req.params.id);
+    const supplier = await Supplier.findOne({ email: req.params.email });
     if (!supplier) return res.status(404).json({ message: "Supplier not found" });
     res.json(supplier);
   } catch (error) {
@@ -32,13 +33,14 @@ export const getSupplierById = async (req, res) => {
   }
 };
 
-// Update supplier
-export const updateSupplier = async (req, res) => {
+// Update supplier by email
+export const updateSupplierByEmail = async (req, res) => {
   try {
-    const supplier = await Supplier.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const supplier = await Supplier.findOneAndUpdate(
+      { email: req.params.email },
+      req.body,
+      { new: true, runValidators: true }
+    );
     if (!supplier) return res.status(404).json({ message: "Supplier not found" });
     res.json({ message: "Supplier updated successfully", supplier });
   } catch (error) {
@@ -46,10 +48,10 @@ export const updateSupplier = async (req, res) => {
   }
 };
 
-// Delete supplier
-export const deleteSupplier = async (req, res) => {
+// Delete supplier by email
+export const deleteSupplierByEmail = async (req, res) => {
   try {
-    const supplier = await Supplier.findByIdAndDelete(req.params.id);
+    const supplier = await Supplier.findOneAndDelete({ email: req.params.email });
     if (!supplier) return res.status(404).json({ message: "Supplier not found" });
     res.json({ message: "Supplier deleted successfully" });
   } catch (error) {
