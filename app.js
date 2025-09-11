@@ -1,7 +1,15 @@
 import express from 'express';
 import userRoutes from './routes/User.routes.js';
+<<<<<<< HEAD
 import bodyParser from "body-parser";
 import transactionRoutes from './routes/Transaction.routes.js';
+=======
+
+import bodyParser from "body-parser";
+
+import transactionRoutes from './routes/transactionRoutes.js';
+
+>>>>>>> 026a6efb349891b91e80c2a28e41aa4af872954b
 const app = express();
 import mailrouter from "./routes/mail.router.js";
 import supplierRoutes from "./routes/supplier.route.js";
@@ -11,6 +19,10 @@ app.use('/', userRoutes);
 app.use(bodyParser.json());
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api", mailrouter);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 026a6efb349891b91e80c2a28e41aa4af872954b
 app.use('/api/transactions', transactionRoutes);
 
 app.get('/', (req, res) => {
