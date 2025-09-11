@@ -13,7 +13,8 @@ const supplierSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    lowercase: true
+    lowercase: true,
+    unique: true,
   },
   phone: {
     type: String,
