@@ -1,0 +1,22 @@
+[
+  {
+    "id": "p1",
+    "name": "Fiber Modem X100",
+    "category": "Modem",
+    "supplierId": "s1",
+    "stock": 25,
+    "reorderPoint": 10,
+    "sku": "FM-X100",
+    "description": "High-speed fiber modem"
+  },
+  {
+    "id": "p2",
+    "name": "LTE Router R50",
+    "category": "Router",
+    "supplierId": "s2",
+    "stock": 5,
+    "reorderPoint": 8,
+    "sku": "LTE-R50",
+    "description": "4G LTE router"
+  }
+]
