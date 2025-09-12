@@ -2,8 +2,7 @@
 
 ## Frontend
 - Mubarak  
-- Janila  
-- Mallikarjun  
+- Janila   
 - Akansha  
 - Meghana  
  
