@@ -9,12 +9,12 @@
 - Vritika  
 
 ## Backend
-- Tanvir  
-- Divya  
+- Tanvir(Inclusively for Machine Learning)
+- Divya(Inclusively for frontend)
 - Aditya  
 - Nikitha  
 
 ## Machine Learning
 - Keerthi  
-- Janila  
+- Janila(Inclusively for Frontend)
 - Vritika  
