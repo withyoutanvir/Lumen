@@ -6,7 +6,7 @@
 - Mallikarjun  
 - Akansha  
 - Meghana  
-- Vritika  
+ 
 
 ## Backend
 - Tanvir(Inclusively for Machine Learning)
