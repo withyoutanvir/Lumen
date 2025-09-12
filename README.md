@@ -17,4 +17,4 @@
 ## Machine Learning
 - Keerthi  
 - Janila(Inclusively for Frontend)
-- Vritika  
+
