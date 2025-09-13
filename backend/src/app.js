@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import userRoutes from './routes/userRoutes.js';
+import Planrouter from './routes/planroute.js';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 dotenv.config();
@@ -17,8 +18,7 @@ app.use(morgan('dev'));
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
 app.use('/api/users', userRoutes);
 app.use('/api/subscriptions', subscriptionRoutes); 
-
-
+app.use('/api/plans', Planrouter);
 
 
 // Add a root route for health check or browser testing

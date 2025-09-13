@@ -13,25 +13,50 @@ const checkAdmin = async (email) => {
 //  Create a new plan (Admin by email)
 export const createPlan = async (req, res) => {
   try {
-    const { email, ...planData } = req.body;
+    const { email, plans } = req.body;
     await checkAdmin(email);
 
-    const plan = new Plan(planData);
-    await plan.save();
+    if (!plans) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Plans data is required" });
+    }
 
-    res.status(201).json({ success: true, data: plan });
+    let newPlans;
+
+    if (Array.isArray(plans)) {
+      if (plans.length === 0) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Plans array cannot be empty" });
+      }
+      // Bulk insert
+      newPlans = await Plan.insertMany(plans);
+    } else if (typeof plans === "object") {
+      // Single insert
+      const plan = new Plan(plans);
+      newPlans = await plan.save();
+    } else {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid plans format" });
+    }
+
+    res.status(201).json({ success: true, data: newPlans });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
 };
 
-//  Get all plans (Admin by email)
 export const getPlansByEmail = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, includeInactive } = req.body;
     await checkAdmin(email);
 
-    const plans = await Plan.find();
+    // Fetch plans: active by default, include inactive if requested
+    const filter = includeInactive ? {} : { isActive: true };
+    const plans = await Plan.find(filter);
+
     res.json({ success: true, data: plans });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
@@ -81,6 +106,7 @@ export const updatePlanByEmail = async (req, res) => {
 };
 
 //  Delete plan (Admin by email + plan name)
+
 export const deletePlanByEmail = async (req, res) => {
   try {
     const { email, name } = req.body;
@@ -92,7 +118,23 @@ export const deletePlanByEmail = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Plan not found" });
 
-    res.json({ success: true, message: "Plan deleted successfully" });
+    // Check if any active subscriptions exist for this plan
+    const activeSubs = await Subscription.find({
+      planId: plan._id,
+      status: "active",
+    });
+    if (activeSubs.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot delete plan, there are active subscriptions",
+      });
+    }
+
+    // Soft delete: mark plan as inactive
+    plan.isActive = false;
+    await plan.save();
+
+    res.json({ success: true, message: "Plan deactivated successfully" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

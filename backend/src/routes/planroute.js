@@ -3,7 +3,7 @@ import {
   createPlan,
   getPlansByEmail,
   getPlanByEmail,
-  updatePlanByName,
+  updatePlanByEmail,
   deletePlanByEmail,
   addDiscountByEmail,
   removeDiscountByEmail,
