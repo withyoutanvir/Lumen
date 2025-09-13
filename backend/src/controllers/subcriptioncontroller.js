@@ -1,5 +1,5 @@
 import Subscription from "../models/usersubscription.js"; // fixed model name
-import Plan from "../models/Plan.js"; // make sure file name matches exactly
+import Plan from "../models/plan.js"; // make sure file name matches exactly
 
 // Create new subscription
 export const createSubscription = async (req, res) => {

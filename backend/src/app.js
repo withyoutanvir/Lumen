@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import userRoutes from './routes/userRoutes.js';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 dotenv.config();
 
 const app = express();
@@ -15,9 +16,15 @@ app.use(morgan('dev'));
 
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
 app.use('/api/users', userRoutes);
-app.use('/api/subscriptions', subscriptionRoutes); // ✅ added
+app.use('/api/subscriptions', subscriptionRoutes); 
 
 
+
+
+// Add a root route for health check or browser testing
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
 
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
