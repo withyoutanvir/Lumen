@@ -1,4 +1,4 @@
-import Plan from "../models/plan.js";
+import Plan from "../models/Plan.js";
 // import User from "../models/User.js";
 
 //  Helper: validate user + admin
