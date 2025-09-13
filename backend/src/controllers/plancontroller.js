@@ -1,16 +1,18 @@
-
-import planSchema from "../models/plan.js";
-// import User from "../models/User.js";
-
+<<<<<<< HEAD
 import Plan from "../models/plan.js";
 import User from "../models/usermodel.js";
+=======
+import Plan from "../models/plan.js";
+// import User from "../models/User.js";
+>>>>>>> 8469d9c5bc882b4ee96463b85a375c0668163aff
 
 
 //  Helper: validate user + admin
 const checkAdmin = async (email) => {
   const user = await User.findOne({ email });
   if (!user) throw new Error("User not found");
-  if (user.role !== "admin") throw new Error("Access denied. Only admins can perform this action.");
+  if (user.role !== "admin")
+    throw new Error("Access denied. Only admins can perform this action.");
   return user;
 };
 
@@ -21,23 +23,29 @@ export const createPlan = async (req, res) => {
     await checkAdmin(email);
 
     if (!plans) {
-      return res.status(400).json({ success: false, message: "Plans data is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Plans data is required" });
     }
 
     let newPlans;
 
     if (Array.isArray(plans)) {
       if (plans.length === 0) {
-        return res.status(400).json({ success: false, message: "Plans array cannot be empty" });
+        return res
+          .status(400)
+          .json({ success: false, message: "Plans array cannot be empty" });
       }
       // Bulk insert
       newPlans = await Plan.insertMany(plans);
-    } else if (typeof plans === 'object') {
+    } else if (typeof plans === "object") {
       // Single insert
       const plan = new Plan(plans);
       newPlans = await plan.save();
     } else {
-      return res.status(400).json({ success: false, message: "Invalid plans format" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid plans format" });
     }
 
     res.status(201).json({ success: true, data: newPlans });
@@ -45,8 +53,6 @@ export const createPlan = async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 };
-
-
 
 export const getPlansByEmail = async (req, res) => {
   try {
@@ -63,7 +69,6 @@ export const getPlansByEmail = async (req, res) => {
   }
 };
 
-
 //  Get a single plan (Admin by email + plan name)
 export const getPlanByEmail = async (req, res) => {
   try {
@@ -71,7 +76,10 @@ export const getPlanByEmail = async (req, res) => {
     await checkAdmin(email);
 
     const plan = await Plan.findOne({ name });
-    if (!plan) return res.status(404).json({ success: false, message: "Plan not found" });
+    if (!plan)
+      return res
+        .status(404)
+        .json({ success: false, message: "Plan not found" });
 
     res.json({ success: true, data: plan });
   } catch (err) {
@@ -85,10 +93,19 @@ export const updatePlanByEmail = async (req, res) => {
     const { email, name, ...updateData } = req.body;
     await checkAdmin(email);
 
-    const plan = await Plan.findOneAndUpdate({ name }, updateData, { new: true });
-    if (!plan) return res.status(404).json({ success: false, message: "Plan not found" });
+    const plan = await Plan.findOneAndUpdate({ name }, updateData, {
+      new: true,
+    });
+    if (!plan)
+      return res
+        .status(404)
+        .json({ success: false, message: "Plan not found" });
 
-    res.json({ success: true, message: "Plan updated successfully", data: plan });
+    res.json({
+      success: true,
+      message: "Plan updated successfully",
+      data: plan,
+    });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
@@ -101,12 +118,17 @@ export const deletePlanByEmail = async (req, res) => {
     const { email, name } = req.body;
     await checkAdmin(email);
 
-    // Find the plan
-    const plan = await Plan.findOne({ name });
-    if (!plan) return res.status(404).json({ success: false, message: "Plan not found" });
+    const plan = await Plan.findOneAndDelete({ name });
+    if (!plan)
+      return res
+        .status(404)
+        .json({ success: false, message: "Plan not found" });
 
     // Check if any active subscriptions exist for this plan
-    const activeSubs = await Subscription.find({ planId: plan._id, status: "active" });
+    const activeSubs = await Subscription.find({
+      planId: plan._id,
+      status: "active",
+    });
     if (activeSubs.length > 0) {
       return res.status(400).json({
         success: false,
@@ -131,12 +153,19 @@ export const addDiscountByEmail = async (req, res) => {
     await checkAdmin(email);
 
     const plan = await Plan.findOne({ name });
-    if (!plan) return res.status(404).json({ success: false, message: "Plan not found" });
+    if (!plan)
+      return res
+        .status(404)
+        .json({ success: false, message: "Plan not found" });
 
     plan.discounts.push(discount);
     await plan.save();
 
-    res.json({ success: true, message: "Discount added successfully", data: plan });
+    res.json({
+      success: true,
+      message: "Discount added successfully",
+      data: plan,
+    });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
@@ -149,12 +178,21 @@ export const removeDiscountByEmail = async (req, res) => {
     await checkAdmin(email);
 
     const plan = await Plan.findOne({ name });
-    if (!plan) return res.status(404).json({ success: false, message: "Plan not found" });
+    if (!plan)
+      return res
+        .status(404)
+        .json({ success: false, message: "Plan not found" });
 
-    plan.discounts = plan.discounts.filter((d) => d._id.toString() !== discountId);
+    plan.discounts = plan.discounts.filter(
+      (d) => d._id.toString() !== discountId
+    );
     await plan.save();
 
-    res.json({ success: true, message: "Discount removed successfully", data: plan });
+    res.json({
+      success: true,
+      message: "Discount removed successfully",
+      data: plan,
+    });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
