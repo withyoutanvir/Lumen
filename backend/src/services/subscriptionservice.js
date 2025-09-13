@@ -1,6 +1,6 @@
 import UserSubscription from "../models/usersubscription.js";
 import Usage from "../models/usage.js";
-import Plan from "../models/Plan.js";
+import Plan from "../models/plan.js";
 import Discount from "../models/Discount.js";
 /**
  * Create a new subscription for a user
