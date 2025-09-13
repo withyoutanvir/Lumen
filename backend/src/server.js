@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
+console.log('TEST_VAR:', process.env.TEST_VAR);
 
 import mongoose from 'mongoose';
 import app from './app.js';

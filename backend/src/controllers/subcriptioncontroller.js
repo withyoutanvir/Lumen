@@ -1,11 +1,11 @@
-import Subscription from "../models/Subscription.js";
-import Plan from "../models/Plan.js";
+import Subscription from "../models/usersubscription.js"; // fixed model name
+import Plan from "../models/Plan.js"; // make sure file name matches exactly
 
 // Create new subscription
 export const createSubscription = async (req, res) => {
   try {
     const { planId, autoRenew } = req.body;
-    const userId = req.user.id; // From auth middleware
+    const userId = req.user._id; // from auth middleware
 
     const plan = await Plan.findById(planId);
     if (!plan) return res.status(404).json({ message: "Plan not found" });
@@ -37,8 +37,7 @@ export const modifySubscription = async (req, res) => {
       return res.status(404).json({ message: "Subscription not found" });
 
     subscription.plan = planId;
-    subscription.updatedAt = Date.now();
-    await subscription.save();
+    await subscription.save(); // updatedAt handled automatically with timestamps
 
     res.json(subscription);
   } catch (err) {
@@ -56,7 +55,7 @@ export const cancelSubscription = async (req, res) => {
       return res.status(404).json({ message: "Subscription not found" });
 
     subscription.status = "cancelled";
-    subscription.endDate = Date.now();
+    subscription.endDate = new Date();
     await subscription.save();
 
     res.json({ message: "Subscription cancelled", subscription });
@@ -87,10 +86,8 @@ export const renewSubscription = async (req, res) => {
 // Get user subscriptions
 export const getUserSubscriptions = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const subscriptions = await Subscription.find({ user: userId }).populate(
-      "plan"
-    );
+    const userId = req.user._id;
+    const subscriptions = await Subscription.find({ user: userId }).populate("plan");
     res.json(subscriptions);
   } catch (err) {
     res.status(500).json({ message: err.message });

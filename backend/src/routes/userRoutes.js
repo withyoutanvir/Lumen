@@ -8,7 +8,7 @@ import {
   deleteUser,
 } from '../controllers/usercontroller.js';
 
-import { protect, admin } from '../middlewares/auth.js';
+import { protect, admin } from '../middleware/auth.js'; // ✅ fixed
 
 const router = express.Router();
 

@@ -13,7 +13,10 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 
+import subscriptionRoutes from './routes/subscriptionRoutes.js';
 app.use('/api/users', userRoutes);
+app.use('/api/subscriptions', subscriptionRoutes); // ✅ added
+
 
 
 app.use((err, req, res, next) => {
