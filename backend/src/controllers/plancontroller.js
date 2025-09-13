@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+
 import Plan from "../models/plan.js";
 import User from "../models/usermodel.js";
-=======
-import Plan from "../models/plan.js";
-// import User from "../models/User.js";
->>>>>>> 8469d9c5bc882b4ee96463b85a375c0668163aff
+
 
 
 //  Helper: validate user + admin
