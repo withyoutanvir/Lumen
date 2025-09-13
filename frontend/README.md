@@ -1,63 +1,12 @@
-# Frontend React Project
+# React + Vite
 
-This is a React project named "frontend" built with TypeScript. It serves as a template for creating a modern web application.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Project Structure
+Currently, two official plugins are available:
 
-```
-frontend
-├── src
-│   ├── components
-│   │   └── App.tsx
-│   ├── index.tsx
-│   └── types
-│       └── index.ts
-├── public
-│   └── index.html
-├── package.json
-├── tsconfig.json
-└── README.md
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Getting Started
+## Expanding the ESLint configuration
 
-To get started with this project, follow these steps:
-
-1. **Clone the repository:**
-   ```
-   git clone <repository-url>
-   ```
-
-2. **Navigate to the project directory:**
-   ```
-   cd frontend
-   ```
-
-3. **Install dependencies:**
-   ```
-   npm install
-   ```
-
-4. **Run the application:**
-   ```
-   npm start
-   ```
-
-The application will be available at `http://localhost:3000`.
-
-## Building for Production
-
-To create a production build, run:
-```
-npm run build
-```
-
-This will generate an optimized build of the application in the `build` directory.
-
-## Contributing
-
-If you would like to contribute to this project, please fork the repository and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
