@@ -55,19 +55,19 @@ const planSchema = new mongoose.Schema(
       required: true,
     },
     quota: {
-      type: Number, 
+      type: Number,
       required: true,
     },
     duration: {
-      type: Number, 
+      type: Number,
       required: true,
     },
     features: {
-      type: [String], 
+      type: [String],
       default: [],
     },
     discounts: {
-      type: [discountSchema], 
+      type: [discountSchema],
       default: [],
     },
     isActive: {
@@ -78,4 +78,4 @@ const planSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Plan", planSchema);
+export default mongoose.model("plan", planSchema);
