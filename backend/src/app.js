@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import userRoutes from './routes/userRoutes.js';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import { errorHandler } from './middleware/errorHandler.js';
 dotenv.config();
 
 const app = express();
@@ -14,9 +15,14 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 
+
 import subscriptionRoutes from './routes/subscriptionRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
+import analyticRoutes from './routes/analyticRoutes.js';
 app.use('/api/users', userRoutes);
-app.use('/api/subscriptions', subscriptionRoutes); 
+app.use('/api/subscriptions', subscriptionRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/analytics', analyticRoutes);
 
 
 
@@ -26,9 +32,6 @@ app.get('/', (req, res) => {
   res.send('API is running');
 });
 
-app.use((err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  res.status(statusCode).json({ message: err.message });
-});
+app.use(errorHandler);
 
 export default app;
